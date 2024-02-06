@@ -142,7 +142,7 @@ sealed class MatrixItem(
             is RoomAliasItem -> roomDisplayName ?: displayName
             else -> displayName
         }
-        return (displayName?.takeIf { it.isNotBlank() } ?: id)
+        return (displayName?.takeIf { it.isNotBlank() }?.replace("\\[TG] ".toRegex(), "")?.replace("\\$".toRegex(), "") ?: id)
                 .let { dn ->
                     var startIndex = 0
                     val initial = dn[startIndex]

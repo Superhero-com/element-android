@@ -198,10 +198,28 @@ class RoomPreviewNoPreviewFragment :
             views.roomPreviewNoPreviewToolbarAvatar.isVisible = false
             views.roomPreviewNoPreviewAvatar.isVisible = false
         }
-        views.roomPreviewNoPreviewToolbarTitle.text = roomName
+        if (roomName.startsWith("[TG] ")) {
+            views.roomPreviewNoPreviewToolbarTitle.text = roomName.replace("[TG] ","")
+        } else if (roomName.startsWith("$")) {
+            views.roomPreviewNoPreviewToolbarTitle.text = roomName.replace("$","")
+        } else {
+            views.roomPreviewNoPreviewToolbarTitle.text = roomName
+        }
+
 
         // Screen
-        views.roomPreviewNoPreviewName.text = roomName
+        if (roomName.startsWith("[TG] ")) {
+            views.roomPreviewNoPreviewName.text = roomName.replace("[TG]","")
+            views.roomPreviewNoPreviewName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.chatimg,0,0,0)
+            views.roomPreviewNoPreviewName.setCompoundDrawablePadding(10)
+        } else if (roomName.startsWith("$")) {
+            views.roomPreviewNoPreviewName.text = roomName.replace("$","")
+            views.roomPreviewNoPreviewName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dollar,0,0,0)
+            views.roomPreviewNoPreviewName.setCompoundDrawablePadding(10)
+        } else {
+            views.roomPreviewNoPreviewName.text = roomName
+        }
+
         views.roomPreviewNoPreviewTopic.setTextOrHide(topic)
     }
 }

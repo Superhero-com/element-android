@@ -152,7 +152,13 @@ class SpacePreviewFragment :
         val spaceAvatarUrl = spacePreviewState.spaceInfo.invoke()?.avatarUrl ?: spacePreviewState.avatarUrl
         val mxItem = MatrixItem.SpaceItem(spacePreviewState.idOrAlias, spaceName, spaceAvatarUrl)
         avatarRenderer.render(mxItem, views.spacePreviewToolbarAvatar)
-        views.roomPreviewNoPreviewToolbarTitle.text = spaceName
+        if (spaceName.startsWith("[TG] ")) {
+            views.roomPreviewNoPreviewToolbarTitle.text = spaceName.replace("[TG]","")
+        } else if (spaceName.startsWith("$")) {
+            views.roomPreviewNoPreviewToolbarTitle.text = spaceName.replace("$","")
+        } else {
+            views.roomPreviewNoPreviewToolbarTitle.text = spaceName
+        }
 //            }
 //            is SpacePeekResult.SpacePeekError,
 //            null -> {
