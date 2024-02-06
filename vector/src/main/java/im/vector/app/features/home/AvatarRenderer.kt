@@ -147,7 +147,7 @@ class AvatarRenderer @Inject constructor(
         val matrixItem = MatrixItem.UserItem(
                 // Need an id starting with @
                 id = profileInfo.matrixId,
-                displayName = profileInfo.displayName,
+                displayName = profileInfo.displayName?.replace("[TG] ","")?.replace("$",""),
         )
 
         val placeholder = getPlaceholderDrawable(matrixItem)

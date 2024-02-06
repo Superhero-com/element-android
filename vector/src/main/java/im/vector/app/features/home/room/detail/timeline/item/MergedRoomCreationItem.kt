@@ -173,10 +173,23 @@ abstract class MergedRoomCreationItem : BasedMergedItem<MergedRoomCreationItem.H
     }
 
     private fun bindCreationSummaryTile(holder: Holder) {
-        val roomDisplayName = roomSummary?.displayName
+        val roomDisplayName = roomSummary?.displayName?.replace("[TG] ","")?.replace("$","")
         val membersCount = roomSummary?.otherMemberIds?.size ?: 0
 
-        holder.roomNameText.setTextOrHide(roomDisplayName)
+        if (roomSummary?.displayName!!.contains("[TG]")) {
+            holder.roomNameText.setTextOrHide(roomDisplayName!!.replace("[TG] ",""))
+            holder.roomNameText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.chatimg, 0,0,0)
+            holder.roomNameText.setCompoundDrawablePadding(10)
+        }
+        if (roomSummary?.displayName!!.startsWith("$")) {
+            holder.roomNameText.setTextOrHide(roomDisplayName!!.replace("$",""))
+            holder.roomNameText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dollar, 0,0,0)
+            holder.roomNameText.setCompoundDrawablePadding(10)
+        } else {
+            holder.roomNameText.setTextOrHide(roomDisplayName)
+        }
+
+
         renderRoomDescription(holder)
         renderRoomTopic(holder)
 
@@ -229,7 +242,7 @@ abstract class MergedRoomCreationItem : BasedMergedItem<MergedRoomCreationItem.H
                 holder.view.resources.getString(R.string.this_is_the_beginning_of_room_no_name)
             }
             else -> {
-                holder.view.resources.getString(R.string.this_is_the_beginning_of_room, roomDisplayName)
+                holder.view.resources.getString(R.string.this_is_the_beginning_of_room, roomDisplayName.replace("[TG] ","").replace("$",""))
             }
         }
         holder.roomDescriptionText.text = description
