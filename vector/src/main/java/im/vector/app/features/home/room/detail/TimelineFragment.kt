@@ -1253,7 +1253,27 @@ class TimelineFragment :
                     views.includeRoomToolbar.roomToolbarContentView.isClickable = false
                 } else {
                     views.includeRoomToolbar.roomToolbarContentView.isClickable = roomSummary.membership == Membership.JOIN
-                    views.includeRoomToolbar.roomToolbarTitleView.text = roomSummary.displayName
+//                    views.includeRoomToolbar.roomToolbarTitleView.text = roomSummary.displayName.replace("[TG] ","").replace("$","")
+                    if (roomSummary.displayName.startsWith("[TG]") && roomSummary.displayName.startsWith("$")) {
+                        // Remove [TG] from the beginning
+                        val modifiedString = roomSummary.displayName.replace("[TG] ", "")
+                        // Update the roomToolbarTitleView.text with the modified string
+                        views.includeRoomToolbar.roomToolbarTitleView.text = modifiedString
+                    } else  if (roomSummary.displayName.startsWith("$") && roomSummary.displayName.startsWith("[TG]")) {
+                        // Remove $ from the beginning
+                        val modifiedString = roomSummary.displayName.replace("$", "")
+                        // Update the roomToolbarTitleView.text with the modified string
+                        views.includeRoomToolbar.roomToolbarTitleView.text = modifiedString
+                    } else  if (roomSummary.displayName.startsWith("[TG] ")){
+                        val modifiedString = roomSummary.displayName.replace("[TG] ","")
+                        views.includeRoomToolbar.roomToolbarTitleView.text = modifiedString
+                    } else if (roomSummary.displayName.startsWith("$")) {
+                        val modifiedString = roomSummary.displayName.replace("$","")
+                        views.includeRoomToolbar.roomToolbarTitleView.text = modifiedString
+                    } else {
+                        views.includeRoomToolbar.roomToolbarTitleView.text = roomSummary.displayName
+                    }
+
                     avatarRenderer.render(roomSummary.toMatrixItem(), views.includeRoomToolbar.roomToolbarAvatarImageView)
                     val showPresence = roomSummary.isDirect
                     views.includeRoomToolbar.roomToolbarPresenceImageView.render(showPresence, roomSummary.directUserPresence)
@@ -1264,6 +1284,7 @@ class TimelineFragment :
             }
         }
     }
+
 
     private fun displayE2eError(withHeldCode: WithHeldCode?) {
         val msgId = when (withHeldCode) {

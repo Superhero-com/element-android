@@ -68,6 +68,18 @@ abstract class SpaceChildInfoItem : VectorEpoxyModel<SpaceChildInfoItem.Holder>(
             itemLongClickListener?.onLongClick(it) ?: false
         }
         holder.titleView.text = matrixItem.displayName ?: holder.rootView.context.getString(R.string.unnamed_room)
+        if (matrixItem.displayName!!.startsWith("[TG] ")) {
+            holder.titleView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.chatimg, 0, 0, 0)
+            holder.titleView.setCompoundDrawablePadding(10)
+        } else if (matrixItem.displayName!!.startsWith("$")) {
+            holder.titleView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.dollar, 0, 0, 0)
+            holder.titleView.setCompoundDrawablePadding(10)
+        } else {
+            // Reset compound drawables if none of the conditions are met
+            holder.titleView.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0)
+            holder.titleView.setCompoundDrawablePadding(0)
+        }
+        holder.titleView.invalidate()
         avatarRenderer.render(matrixItem, holder.avatarImageView)
 
         holder.descriptionText.text = span {

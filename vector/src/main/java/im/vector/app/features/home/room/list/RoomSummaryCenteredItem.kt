@@ -93,6 +93,15 @@ abstract class RoomSummaryCenteredItem : VectorEpoxyModel<RoomSummaryCenteredIte
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
             itemLongClickListener?.onLongClick(it) ?: false
         }
+        if (matrixItem.displayName!!.startsWith("[TG] ")){
+            holder.titleView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.chatimg, 0,0,0)
+        } else  if (matrixItem.displayName!!.startsWith("$")) {
+            holder.titleView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.dollar,0,0,0)
+        } else {
+            holder.titleView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0)
+        }
+
+        holder.titleView.invalidate()
         holder.titleView.text = matrixItem.getBestName()
         avatarRenderer.render(matrixItem, holder.avatarImageView)
         holder.roomAvatarDecorationImageView.render(encryptionTrustLevel)

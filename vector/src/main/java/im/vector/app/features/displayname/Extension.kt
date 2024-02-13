@@ -24,8 +24,26 @@ fun MatrixItem.getBestName(): String {
         // Best name is the id, and we keep the displayName of the room for the case we need the first letter
         id
     } else {
-        displayName
+//        displayName
+//                ?.takeIf { it.isNotBlank() }?.replace("[TG] ","")?.replace("$","")
+//                ?: VectorMatrixItemDisplayNameFallbackProvider.getDefaultName(this).replace("[TG] ","").replace("$","")
+        val modifiedDisplayName = displayName
                 ?.takeIf { it.isNotBlank() }
-                ?: VectorMatrixItemDisplayNameFallbackProvider.getDefaultName(this)
+                ?.let {
+                    when {
+                        it.startsWith("[TG] ") -> {
+                            it.replaceFirst("[TG] ", "") // Remove [TG] from the beginning
+                        }
+                        it.startsWith("$") -> {
+                            it.replace("$", "") // Remove $ from the string
+                        }
+                        else -> it
+                    }
+                }
+                ?: VectorMatrixItemDisplayNameFallbackProvider.getDefaultName(this).replace("[TG] ","").replace("$","")
+
+        modifiedDisplayName.replace("[TG] ", "").replace("$","")
+
     }
+
 }

@@ -222,7 +222,25 @@ class RoomProfileFragment :
                 Timber.w("The room has been left")
                 activity?.finish()
             } else {
-                headerViews.roomProfileNameView.text = it.displayName
+//                headerViews.roomProfileNameView.text = it.displayName.replace("[TG] ","").replace("$","")
+                if (it.displayName.startsWith("[TG]")) {
+                    val modifiedString = it.displayName.replace("[TG] ","").replace("$","$")
+                    headerViews.roomProfileNameView.text = modifiedString
+                } else if (it.displayName.startsWith("$")) {
+                    val modifiedString = it.displayName.replace("$","").replace("[TG]","[TG]")
+                    headerViews.roomProfileNameView.text = modifiedString
+                } else {
+                    headerViews.roomProfileNameView.text = it.displayName
+                }
+                if (it.displayName.startsWith("[TG]")) {
+                    headerViews.roomProfileNameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.chatimg,0,0,0)
+                    headerViews.roomProfileNameView.setCompoundDrawablePadding(10);
+                }
+
+                if (it.displayName.startsWith("$")) {
+                    headerViews.roomProfileNameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.dollar, 0,0,0)
+                    headerViews.roomProfileNameView.setCompoundDrawablePadding(10);
+                }
                 views.matrixProfileToolbarTitleView.text = it.displayName
                 headerViews.roomProfileAliasView.setTextOrHide(it.canonicalAlias)
                 val matrixItem = it.toMatrixItem()

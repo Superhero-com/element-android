@@ -63,7 +63,18 @@ abstract class PublicRoomItem : VectorEpoxyModel<PublicRoomItem.Holder>(R.layout
         holder.rootView.onClick(globalListener)
 
         avatarRenderer.render(matrixItem, holder.avatarView)
-        holder.nameView.text = matrixItem.displayName
+        holder.nameView.text = matrixItem.displayName?.replace("[TG] ", "")?.replace("$","")
+        if (matrixItem.displayName!!.startsWith("[TG] ")) {
+            holder.nameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.chatimg,0,0,0)
+            holder.nameView.setCompoundDrawablePadding(10)
+        } else if (matrixItem.displayName!!.startsWith("$")) {
+            holder.nameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.dollar, 0,0,0)
+            holder.nameView.setCompoundDrawablePadding(10)
+        } else {
+            holder.nameView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0)
+            holder.nameView.setCompoundDrawablePadding(0)
+        }
+
         holder.aliasView.setTextOrHide(roomAlias)
         holder.topicView.setTextOrHide(roomTopic)
         // TODO Use formatter for big numbers?
