@@ -42,6 +42,6 @@
     <color name="palette_gray_400">#6F7882</color>
     <color name="palette_gray_450">#394049</color>
     <color name="palette_black_800">#15191E</color>
-    <color name="palette_black_950">#21262C</color>
+    <color name="palette_black_950">#21262C</color>  
 
 </resources>
