@@ -16,7 +16,7 @@
     <color name="palette_polly">#E64F7A</color>
     <color name="palette_melon">#FF812D</color>
 
-    <color name="palette_element_green">#0DBD8B</color>
+    <color name="palette_element_green">#6147FF</color>
     <color name="palette_element_orange">#D9B072</color>
     <color name="palette_white">#FFFFFF</color>
     <color name="palette_vermilion">#FF5B55</color>
@@ -42,6 +42,6 @@
     <color name="palette_gray_400">#6F7882</color>
     <color name="palette_gray_450">#394049</color>
     <color name="palette_black_800">#15191E</color>
-    <color name="palette_black_950">#21262C</color>
+    <color name="palette_black_950">#21262C</color>  
 
 </resources>
