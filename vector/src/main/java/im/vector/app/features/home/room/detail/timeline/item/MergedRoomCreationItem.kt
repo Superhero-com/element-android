@@ -176,7 +176,7 @@ abstract class MergedRoomCreationItem : BasedMergedItem<MergedRoomCreationItem.H
         val roomDisplayName = roomSummary?.displayName?.replace("[TG] ","")?.replace("$","")
         val membersCount = roomSummary?.otherMemberIds?.size ?: 0
 
-        if (roomSummary?.displayName!!.contains("[TG]")) {
+        if (roomSummary?.displayName!!.startsWith("[TG]")) {
             holder.roomNameText.setTextOrHide(roomDisplayName!!.replace("[TG] ",""))
             holder.roomNameText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.chatimg, 0,0,0)
             holder.roomNameText.setCompoundDrawablePadding(10)

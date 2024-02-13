@@ -64,10 +64,10 @@ abstract class PublicRoomItem : VectorEpoxyModel<PublicRoomItem.Holder>(R.layout
 
         avatarRenderer.render(matrixItem, holder.avatarView)
         holder.nameView.text = matrixItem.displayName?.replace("[TG] ", "")?.replace("$","")
-        if (matrixItem.displayName!!.contains("[TG] ")) {
+        if (matrixItem.displayName!!.startsWith("[TG] ")) {
             holder.nameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.chatimg,0,0,0)
             holder.nameView.setCompoundDrawablePadding(10)
-        } else if (matrixItem.displayName!!.contains("$")) {
+        } else if (matrixItem.displayName!!.startsWith("$")) {
             holder.nameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.dollar, 0,0,0)
             holder.nameView.setCompoundDrawablePadding(10)
         } else {

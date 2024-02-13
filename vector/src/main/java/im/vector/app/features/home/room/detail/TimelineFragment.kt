@@ -1254,12 +1254,12 @@ class TimelineFragment :
                 } else {
                     views.includeRoomToolbar.roomToolbarContentView.isClickable = roomSummary.membership == Membership.JOIN
 //                    views.includeRoomToolbar.roomToolbarTitleView.text = roomSummary.displayName.replace("[TG] ","").replace("$","")
-                    if (roomSummary.displayName.startsWith("[TG]") && roomSummary.displayName.contains("$")) {
+                    if (roomSummary.displayName.startsWith("[TG]") && roomSummary.displayName.startsWith("$")) {
                         // Remove [TG] from the beginning
                         val modifiedString = roomSummary.displayName.replace("[TG] ", "")
                         // Update the roomToolbarTitleView.text with the modified string
                         views.includeRoomToolbar.roomToolbarTitleView.text = modifiedString
-                    } else  if (roomSummary.displayName.startsWith("$") && roomSummary.displayName.contains("[TG]")) {
+                    } else  if (roomSummary.displayName.startsWith("$") && roomSummary.displayName.startsWith("[TG]")) {
                         // Remove $ from the beginning
                         val modifiedString = roomSummary.displayName.replace("$", "")
                         // Update the roomToolbarTitleView.text with the modified string

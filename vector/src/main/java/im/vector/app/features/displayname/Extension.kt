@@ -34,7 +34,7 @@ fun MatrixItem.getBestName(): String {
                         it.startsWith("[TG] ") -> {
                             it.replaceFirst("[TG] ", "") // Remove [TG] from the beginning
                         }
-                        it.contains("$") -> {
+                        it.startsWith("$") -> {
                             it.replace("$", "") // Remove $ from the string
                         }
                         else -> it

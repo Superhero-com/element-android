@@ -232,12 +232,12 @@ class RoomProfileFragment :
                 } else {
                     headerViews.roomProfileNameView.text = it.displayName
                 }
-                if (it.displayName.contains("[TG]")) {
+                if (it.displayName.startsWith("[TG]")) {
                     headerViews.roomProfileNameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.chatimg,0,0,0)
                     headerViews.roomProfileNameView.setCompoundDrawablePadding(10);
                 }
 
-                if (it.displayName.contains("$")) {
+                if (it.displayName.startsWith("$")) {
                     headerViews.roomProfileNameView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.dollar, 0,0,0)
                     headerViews.roomProfileNameView.setCompoundDrawablePadding(10);
                 }
